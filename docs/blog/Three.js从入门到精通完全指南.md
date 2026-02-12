@@ -208,7 +208,7 @@ console.log('Three.js已加载，版本:', THREE.REVISION);
 npm run dev
 ```
 
-访问 http://localhost:5173 即可看到项目。
+访问 `http://localhost:5173` 即可看到项目。
 
 ---
 

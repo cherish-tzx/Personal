@@ -51,6 +51,9 @@ export default defineConfig({
   // 站点基本信息
   title: "LH-personal blog",
   description: "个人博客 + 组件库 — Vue3 + TypeScript + VitePress",
+  
+  // 忽略死链接检查（如 localhost 开发地址等）
+  ignoreDeadLinks: true,
 
   // 浏览器标签页图标（favicon）：修改下面路径即可更换
   head: [
