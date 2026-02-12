@@ -51,7 +51,11 @@ export default defineConfig({
   // 站点基本信息
   title: "LH-personal blog",
   description: "个人博客 + 组件库 — Vue3 + TypeScript + VitePress",
-  
+
+  // GitHub Pages 项目站点的 base（如 https://user.github.io/仓库名/）
+  // 本地开发不设置 BASE_PATH 时使用 '/'；CI 中由 workflow 注入
+  base: process.env.BASE_PATH ?? "/",
+
   // 忽略死链接检查（如 localhost 开发地址等）
   ignoreDeadLinks: true,
 

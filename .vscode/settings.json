@@ -1,6 +1,6 @@
 {
   "files.associations": {
-    "*.gitignore": "ignore",
-    ".gitignore": "ignore"
+    "*.gitignore": "gitignore",
+    ".gitignore": "gitignore"
   }
 }
