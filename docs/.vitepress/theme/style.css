@@ -1,0 +1,278 @@
+/* ============================================
+ * 全局样式 — 自定义 VitePress 主题变量
+ * ============================================ */
+
+ :root {
+    /* 主色调 */
+    --vp-c-brand-1: #4f46e5;
+    --vp-c-brand-2: #6366f1;
+    --vp-c-brand-3: #818cf8;
+    --vp-c-brand-soft: rgba(99, 102, 241, 0.14);
+  
+    /* ✅ 首页标题 — 渐变色字体 */
+    --vp-home-hero-name-color: transparent;
+    --vp-home-hero-name-background: linear-gradient(
+      135deg,
+      #4f46e5,
+      #a855f7,
+      #06b6d4
+    );
+  
+    /* ✅ 首页图片 — 光晕效果（背景渐变 + 模糊） */
+    --vp-home-hero-image-background-image: linear-gradient(
+      135deg,
+      #4f46e580,
+      #a855f780,
+      #06b6d480
+    );
+    --vp-home-hero-image-filter: blur(44px);
+  }
+  
+  /* ============================================
+   * ✅ Hero 图片光晕增强 — 多层发光效果
+   * ============================================ */
+  
+  /* 确保图片容器有相对定位，以便子元素绝对定位 */
+  /* .VPHero .image-container {
+    position: relative;
+    overflow: hidden;
+  } */
+  
+  /* 图片容器添加动画光晕 */
+  .VPHero .image-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center center;
+    background-image: linear-gradient(
+      105deg,
+      #bd34fe 30%,
+      #47caff 100%
+    );
+    filter: blur(46px);
+    opacity: 0.9;
+    animation: glow-pulse 4s ease-in-out infinite alternate;
+  }
+  /* :root {
+    --vp-home-hero-name-color: transparent;
+    --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #bd34fe 30%, #41d1ff);
+  
+    --vp-home-hero-image-background-image: linear-gradient(-45deg, #bd34fe 50%, #47caff 50%);
+    --vp-home-hero-image-filter: blur(40px);
+  } */
+  
+  /* 光晕呼吸动画 */
+  @keyframes glow-pulse {
+    0% {
+      opacity: 0.6;
+      transform: translate(-50%, -50%) scale(0.9);
+    }
+    /* 50%  { opacity: 0.8; transform: translate(-50%, -50%) scale(1); } */
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.06);
+    }
+  }
+  
+  /* 图片本身：默认 + 悬浮放大，移出恢复（不裁切、位置居中） */
+  .VPHero .image-container {
+    cursor: pointer;
+    display: block;
+    overflow: visible; /* 放大时不要裁切右侧 */
+  }
+  .VPHero .image-container .image-src {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    /* 保留原有居中 translate，只叠加 scale，避免位置错位 */
+  }
+  /* 鼠标悬浮 → 图片放大（保持 translate(-50%,-50%) 居中） */
+  .VPHero .image-container:hover .image-src {
+    transform: translate(-50%, -50%) scale(1.12);
+  }
+  /* 鼠标移出 → 恢复原样（与 VitePress 默认一致） */
+  .VPHero .image-container:not(:hover) .image-src {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  /* 放大时不裁切 */
+  .VPHero .container .image {
+    overflow: visible;
+  }
+  
+  /* ============================================
+   * ✅ Hero 标题渐变动画 — 颜色流动效果
+   * ============================================ */
+  .VPHero .name .clip {
+    background: linear-gradient(135deg, #4f46e5, #a855f7, #06b6d4, #4f46e5);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: gradient-shift 6s ease infinite;
+  }
+  
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* ============================================
+   * ✅ Feature 卡片 — 悬浮放大 + 阴影 + 边框发光
+   * ============================================ */
+  .VPFeature {
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border: 1px solid transparent !important;
+  }
+  
+  .VPFeature:hover {
+    transform: translateY(-8px) scale(1.02) !important;
+    box-shadow: 0 12px 40px rgba(79, 70, 229, 0.15),
+      0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    border-color: var(--vp-c-brand-soft) !important;
+  }
+  
+  /* Feature 图标悬浮时旋转放大 */
+  .VPFeature:hover .icon {
+    transform: scale(1.2) rotate(5deg);
+    transition: transform 0.35s ease;
+  }
+  
+  /* ============================================
+   * ✅ 按钮 — 悬浮发光效果
+   * ============================================ */
+  .VPButton.brand {
+    box-shadow: 0 0 0 rgba(79, 70, 229, 0);
+    transition: all 0.3s ease;
+  }
+  
+  .VPButton.brand:hover {
+    box-shadow: 0 0 20px rgba(79, 70, 229, 0.4);
+    transform: translateY(-2px);
+  }
+  
+  /* ============================================
+   * 组件演示区域样式
+   * ============================================ */
+  .demo-block {
+    border: 1px solid var(--vp-c-divider);
+    border-radius: 8px;
+    padding: 24px;
+    margin: 16px 0;
+    background: var(--vp-c-bg-soft);
+  }
+  
+  .demo-block + .demo-block {
+    margin-top: 12px;
+  }
+  
+  /* 演示标题 */
+  .demo-title {
+    font-size: 14px;
+    color: var(--vp-c-text-2);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  /* ============================================
+   * 博客索引 — 链接卡片列表（背景色 + 可点击跳转）
+   * 保证列表完整显示，不限制高度
+   * ============================================ */
+  .blog-card-list {
+    overflow: visible;
+    max-height: none;
+  }
+
+  .blog-card-list ul {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .blog-card-list li {
+    list-style: none;
+    margin: 0;
+  }
+
+  .blog-card-list a {
+    display: block;
+    padding: 14px 18px;
+    border-radius: 10px;
+    background: rgba(157, 195, 226, 0.22);
+    color: var(--vp-c-text-1);
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid transparent;
+  }
+
+  .blog-card-list a:hover {
+    background: rgba(192, 127, 223, 0.22);
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+    color: #fff;
+    border-color: var(--vp-c-brand-2);
+  }
+
+  /* ============================================
+   * 文档内目录 — 卡片式样式（TOC 区块）
+   * ============================================ */
+  .doc-toc {
+    padding: 20px 24px;
+    margin: 20px 0;
+    border-radius: 12px;
+    background: var(--vp-c-bg-soft);
+    border: 1px solid var(--vp-c-divider);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  .doc-toc h2 {
+    margin: 0 0 14px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--vp-c-text-1);
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--vp-c-divider);
+  }
+
+  .doc-toc ol {
+    margin: 0;
+    padding-left: 1.4em;
+    list-style: none;
+    counter-reset: toc;
+  }
+
+  .doc-toc ol li {
+    counter-increment: toc;
+    margin: 6px 0;
+    position: relative;
+  }
+
+  .doc-toc ol li::before {
+    content: counter(toc);
+    position: absolute;
+    left: -1.4em;
+    font-size: 0.85em;
+    font-weight: 600;
+    /* color: rgba(25, 238, 132, 0.22); */
+  }
+
+  .doc-toc a {
+    color: var(--vp-c-text-2);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease, padding-left 0.2s ease;
+  }
+
+  .doc-toc a:hover {
+    color: var(--vp-c-brand-1);
+    padding-left: 4px;
+  }
+
+  
